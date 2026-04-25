@@ -87,7 +87,7 @@ PassPluginLibraryInfo getFunctionOutliningPluginInfo() {
                     return false;
                 });
             PB.registerOptimizerLastEPCallback(
-                [](ModulePassManager &MPM, OptimizationLevel Level) {
+                [](ModulePassManager &MPM, OptimizationLevel Level, ThinOrFullLTOPhase) {
                     FunctionPassManager FPM;
                     FPM.addPass(FunctionOutliningPass());
                     MPM.addPass(createModuleToFunctionPassAdaptor(std::move(FPM)));

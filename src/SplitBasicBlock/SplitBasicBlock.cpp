@@ -52,7 +52,7 @@ PassPluginLibraryInfo getSplitBasicBlockPluginInfo() {
                     return false;
                 });
             PB.registerOptimizerLastEPCallback(
-                [](ModulePassManager &MPM, OptimizationLevel Level) {
+                [](ModulePassManager &MPM, OptimizationLevel Level, ThinOrFullLTOPhase) {
                     FunctionPassManager FPM;
                     FPM.addPass(SplitBasicBlockPass());
                     MPM.addPass(createModuleToFunctionPassAdaptor(std::move(FPM)));

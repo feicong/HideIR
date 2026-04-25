@@ -87,7 +87,7 @@ PassPluginLibraryInfo getOpaquePredicatePluginInfo() {
                 });
             // Register to run at the end of the optimization pipeline
             PB.registerOptimizerLastEPCallback(
-                [](ModulePassManager &MPM, OptimizationLevel Level) {
+                [](ModulePassManager &MPM, OptimizationLevel Level, ThinOrFullLTOPhase) {
                     FunctionPassManager FPM;
                     FPM.addPass(OpaquePredicatePass());
                     MPM.addPass(createModuleToFunctionPassAdaptor(std::move(FPM)));

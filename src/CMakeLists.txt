@@ -10,3 +10,20 @@ add_subdirectory(FunctionOutlining)
 add_subdirectory(AntiDebugging)
 add_subdirectory(APIHiding)
 add_subdirectory(AntiTampering)
+
+if(APPLE)
+    foreach(pass_target
+        FlatteningPass
+        OpaquePredicatePass
+        SplitBasicBlockPass
+        StringEncryptionPass
+        FunctionOutliningPass
+        AntiDebuggingPass
+        APIHidingPass
+        AntiTamperingPass
+    )
+        if(TARGET ${pass_target})
+            target_link_options(${pass_target} PRIVATE "-Wl,-undefined,dynamic_lookup")
+        endif()
+    endforeach()
+endif()

@@ -145,7 +145,7 @@ PassPluginLibraryInfo getFlatteningPluginInfo() {
                     return false;
                 });
             PB.registerOptimizerLastEPCallback(
-                [](ModulePassManager &MPM, OptimizationLevel Level) {
+                [](ModulePassManager &MPM, OptimizationLevel Level, ThinOrFullLTOPhase) {
                     FunctionPassManager FPM;
                     FPM.addPass(FlatteningPass());
                     MPM.addPass(createModuleToFunctionPassAdaptor(std::move(FPM)));
